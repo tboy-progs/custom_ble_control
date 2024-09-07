@@ -8,9 +8,10 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        // title: Text('custom ble control'),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+      body: Column(
+        children: [
+          Text('characteristic 01'),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
