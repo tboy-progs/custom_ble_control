@@ -12,6 +12,11 @@ class MainPage extends StatelessWidget {
         // title: Text('custom ble control'),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(Icons.add),
+        tooltip: 'Add Control',
+      ),
     );
   }
 }
