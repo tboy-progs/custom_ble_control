@@ -8,9 +8,13 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      body: ListView(
         children: [
-          Text('characteristic 01'),
+          _listViewItem("send button 01", "send"),
+          _listViewItem("send button 01", "send"),
+          _listViewItem("send button 01", "send"),
+          _listViewItem("send button 01", "send"),
+          _listViewItem("send button 01", "send"),
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -18,6 +22,19 @@ class MainPage extends StatelessWidget {
         child: Icon(Icons.add),
         tooltip: 'Add Control',
       ),
+    );
+  }
+
+  Widget _listViewItem(String title, String buttonText) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Text(title),
+        OutlinedButton(
+          onPressed: () {},
+          child: Text(buttonText),
+        ),
+      ],
     );
   }
 }
