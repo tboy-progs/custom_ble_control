@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:custom_ble_control/page/main_page.dart';
 import 'package:flutter/services.dart';
+
+import 'package:custom_ble_control/page/main_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
