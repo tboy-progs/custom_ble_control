@@ -10,13 +10,7 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
-        children: [
-          _listViewItem("send button 01", "send"),
-          _listViewItem("send button 01", "send"),
-          _listViewItem("send button 01", "send"),
-          _listViewItem("send button 01", "send"),
-          _listViewItem("send button 01", "send"),
-        ],
+        children: [],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -26,19 +20,6 @@ class MainPage extends StatelessWidget {
         tooltip: 'Add Control',
         child: const Icon(Icons.add),
       ),
-    );
-  }
-
-  Widget _listViewItem(String title, String buttonText) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Text(title),
-        OutlinedButton(
-          onPressed: () {},
-          child: Text(buttonText),
-        ),
-      ],
     );
   }
 }

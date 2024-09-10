@@ -29,7 +29,7 @@ class CreateControlPage extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('特性名'),
+              Text('Service ID'),
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.7,
                 height: 48,
@@ -47,7 +47,25 @@ class CreateControlPage extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('サービス名'),
+              Text('Characteristic ID'),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.7,
+                height: 48,
+                child: const TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(4.0)),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 30),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Descriptor ID'),
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.7,
                 height: 48,
