@@ -1,85 +1,34 @@
 import 'package:flutter/material.dart';
 
 class CreateControlPage extends StatelessWidget {
-  const CreateControlPage({super.key});
+  CreateControlPage({super.key});
+
+  List<String> textList = ['service1', 'service2', 'service3'];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+      body: SafeArea(
+        child: Center(
+          child: Column(
             children: [
-              Text('接続デバイス名'),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.7,
-                height: 48,
-                child: const TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(4.0)),
-                    ),
-                  ),
+              Column(
+                children: [
+                  Text('DEVICE NAME'),
+                  Text('ESP32-AAA'),
+                ],
+              ),
+              Container(
+                height: 300,
+                child: ListView(
+                  children: [
+                    Text(textList[0]),
+                  ],
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 30),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Service ID'),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.7,
-                height: 48,
-                child: const TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(4.0)),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 30),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Characteristic ID'),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.7,
-                height: 48,
-                child: const TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(4.0)),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 30),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Descriptor ID'),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.7,
-                height: 48,
-                child: const TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(4.0)),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
+        ),
       ),
     );
   }

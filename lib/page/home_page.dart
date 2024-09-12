@@ -21,7 +21,7 @@ class HomePage extends StatelessWidget {
                   children: [
                     Column(
                       children: [
-                        Text('DEVICE NAME'),
+                        Text('ESP32-AAA'),
                         Text(
                           '00002AC6-0000-1000-8000-00805F9B34FB',
                           style: TextStyle(fontSize: 8),
@@ -29,7 +29,12 @@ class HomePage extends StatelessWidget {
                       ],
                     ),
                     OutlinedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => CreateControlPage()));
+                      },
                       child: Text('Info'),
                     ),
                   ],
@@ -40,12 +45,9 @@ class HomePage extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => CreateControlPage()));
-        },
-        tooltip: 'Add Control',
-        child: const Icon(Icons.add),
+        onPressed: () {},
+        tooltip: 'Scan BLE Device',
+        child: const Icon(Icons.loop),
       ),
     );
   }
