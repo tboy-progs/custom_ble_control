@@ -28,5 +28,11 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+<string>アプリがBluetoothを使用してデバイスに接続するために必要です。</string>
+
+<key>NSBluetoothPeripheralUsageDescription</key>
+<string>アプリがBluetoothを使用してデバイスに接続するために必要です。</string>
+
 </dict>
 </plist>

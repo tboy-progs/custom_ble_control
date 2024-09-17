@@ -1,10 +1,27 @@
-import 'package:custom_ble_control/page/create_control_page.dart';
 import 'package:flutter/material.dart';
+import 'package:custom_ble_control/page/create_control_page.dart';
+import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({
+class ScanPage extends StatefulWidget {
+  const ScanPage({
     super.key,
   });
+
+  @override
+  State<ScanPage> createState() => _ScanPageState();
+}
+
+class _ScanPageState extends State<ScanPage> {
+  List<BluetoothDevice> _systemDevices = [];
+
+  Future onScanPressed() async {
+    try {
+      _systemDevices = await FlutterBluePlus.systemDevices;
+    } catch (e) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("System devices error")));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +62,9 @@ class HomePage extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          onScanPressed();
+        },
         tooltip: 'Scan BLE Device',
         child: const Icon(Icons.loop),
       ),
