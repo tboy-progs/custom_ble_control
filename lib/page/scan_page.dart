@@ -14,7 +14,6 @@ class ScanPage extends StatefulWidget {
 }
 
 class _ScanPageState extends State<ScanPage> {
-  List<BluetoothDevice> _systemDevices = [];
   List<ScanResult> _scanResults = [];
   bool _isScanning = false;
   late StreamSubscription<List<ScanResult>> _scanResultsSubscription;
@@ -40,12 +39,6 @@ class _ScanPageState extends State<ScanPage> {
   }
 
   Future onScanPressed() async {
-    try {
-      _systemDevices = await FlutterBluePlus.systemDevices;
-    } catch (e) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("System devices error")));
-    }
     try {
       var subscription = FlutterBluePlus.onScanResults.listen(
         (results) {
