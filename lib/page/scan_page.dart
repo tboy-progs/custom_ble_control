@@ -38,9 +38,10 @@ class _ScanPageState extends State<ScanPage> {
     });
   }
 
+  // onScanResultは以前の結果を再送信しない
   Future onScanPressed() async {
     try {
-      var subscription = FlutterBluePlus.onScanResults.listen(
+      var subscription = FlutterBluePlus.scanResults.listen(
         (results) {
           if (results.isNotEmpty) {
             ScanResult r = results.last; // the most recently found device
@@ -57,11 +58,13 @@ class _ScanPageState extends State<ScanPage> {
     } catch (e) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text("Start scan error")));
-    }
+    } finally {}
     if (mounted) {
       setState(() {});
     }
   }
+
+  // List<Widget> buildScanResultTiles(BuildContext context) {}
 
   @override
   Widget build(BuildContext context) {
