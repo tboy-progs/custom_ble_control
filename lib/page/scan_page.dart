@@ -15,56 +15,45 @@ class ScanPage extends StatefulWidget {
 
 class _ScanPageState extends State<ScanPage> {
   List<ScanResult> _scanResults = [];
-  bool _isScanning = false;
   late StreamSubscription<List<ScanResult>> _scanResultsSubscription;
-  late StreamSubscription<bool> _isScanningSubscription;
 
   @override
   void initState() {
     super.initState();
 
-    _scanResultsSubscription = FlutterBluePlus.scanResults.listen((results) {
-      _scanResults = results;
-      if (mounted) {
-        setState(() {});
-      }
-    }, onError: (e) {});
+    _scanResultsSubscription = FlutterBluePlus.scanResults.listen(
+      (results) {
+        _scanResults = results;
+        if (mounted) {
+          setState(() {});
+        }
+      },
+      onError: (e) {
+        print("scan error:${e} ");
+      },
+    );
+  }
 
-    _isScanningSubscription = FlutterBluePlus.isScanning.listen((state) {
-      _isScanning = state;
-      if (mounted) {
-        setState(() {});
-      }
-    });
+  @override
+  void dispose() {
+    _scanResultsSubscription.cancel();
+    super.dispose();
   }
 
   // onScanResultは以前の結果を再送信しない
   Future onScanPressed() async {
-    try {
-      var subscription = FlutterBluePlus.scanResults.listen(
-        (results) {
-          if (results.isNotEmpty) {
-            ScanResult r = results.last; // the most recently found device
-            if (r.device.advName.isNotEmpty) {
-              print(
-                  '${r.device.remoteId}: "${r.advertisementData.advName}" found!');
-            }
-          }
-        },
-        onError: (e) => print(e),
-      );
+    print("scan pressed.");
 
+    try {
       await FlutterBluePlus.startScan(timeout: const Duration(seconds: 5));
     } catch (e) {
       ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Start scan error")));
-    } finally {}
+          .showSnackBar(const SnackBar(content: Text("Start scan error")));
+    }
     if (mounted) {
       setState(() {});
     }
   }
-
-  // List<Widget> buildScanResultTiles(BuildContext context) {}
 
   @override
   Widget build(BuildContext context) {
@@ -73,13 +62,13 @@ class _ScanPageState extends State<ScanPage> {
         children: [
           Container(
             height: 150,
-            padding: EdgeInsets.all(8),
+            padding: const EdgeInsets.all(8),
             child: ListView(
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Column(
+                    const Column(
                       children: [
                         Text('ESP32-AAA'),
                         Text(
@@ -95,7 +84,7 @@ class _ScanPageState extends State<ScanPage> {
                             MaterialPageRoute(
                                 builder: (context) => CreateControlPage()));
                       },
-                      child: Text('Info'),
+                      child: const Text('Info'),
                     ),
                   ],
                 ),

@@ -12,13 +12,13 @@ class CreateControlPage extends StatelessWidget {
         child: Center(
           child: Column(
             children: [
-              Column(
+              const Column(
                 children: [
                   Text('DEVICE NAME'),
                   Text('ESP32-AAA'),
                 ],
               ),
-              Container(
+              SizedBox(
                 height: 300,
                 child: ListView(
                   children: [

@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(),
-      home: ScanPage(),
+      home: const ScanPage(),
       debugShowCheckedModeBanner: false,
     );
   }
