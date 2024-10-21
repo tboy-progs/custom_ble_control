@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:custom_ble_control/component/scan_result_tile.dart';
 import 'package:flutter/material.dart';
-import 'package:custom_ble_control/page/create_control_page.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
 class ScanPage extends StatefulWidget {
@@ -59,7 +58,7 @@ class _ScanPageState extends State<ScanPage> {
   List<Widget> _buildScanResultTiles(BuildContext context) {
     return _scanResults
         .map(
-          (r) => ScanResultTile(result: r),
+          (r) => ScanResultTile(scanResult: r),
         )
         .toList();
   }
@@ -67,6 +66,7 @@ class _ScanPageState extends State<ScanPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[200],
       body: ListView(
         children: [
           Container(
@@ -75,29 +75,6 @@ class _ScanPageState extends State<ScanPage> {
             child: ListView(
               children: [
                 ..._buildScanResultTiles(context),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                //   children: [
-                //     const Column(
-                //       children: [
-                //         Text('ESP32-AAA'),
-                //         Text(
-                //           '00002AC6-0000-1000-8000-00805F9B34FB',
-                //           style: TextStyle(fontSize: 8),
-                //         )
-                //       ],
-                //     ),
-                //     OutlinedButton(
-                //       onPressed: () {
-                //         Navigator.push(
-                //             context,
-                //             MaterialPageRoute(
-                //                 builder: (context) => CreateControlPage()));
-                //       },
-                //       child: const Text('Info'),
-                //     ),
-                //   ],
-                // ),
               ],
             ),
           ),

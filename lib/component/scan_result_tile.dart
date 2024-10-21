@@ -4,44 +4,75 @@ import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 class ScanResultTile extends StatefulWidget {
   const ScanResultTile({
     super.key,
-    required this.result,
+    required this.scanResult,
   });
 
-  final ScanResult result;
+  final ScanResult scanResult;
 
   @override
   State<ScanResultTile> createState() => _ScanResultTileState();
 }
 
 class _ScanResultTileState extends State<ScanResultTile> {
-  late ScanResult result;
+  late ScanResult scanResult;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
 
-    this.result = widget.result;
+    this.scanResult = widget.scanResult;
+  }
+
+  String getDeviceName(ScanResult scanResult) {
+    return scanResult.advertisementData.advName.isEmpty
+        ? "No Name"
+        : scanResult.advertisementData.advName;
+  }
+
+  String getBDAddress(ScanResult scanResult) {
+    return scanResult.device.remoteId.toString();
+  }
+
+  Widget buildConnectButton(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {},
+      child: Text("CONNECT"),
+    );
   }
 
   Widget _buildTitle(BuildContext context) {
-    if (result.advertisementData.advName.isNotEmpty) {
-      return Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(result.advertisementData.advName),
-        ],
-      );
-    } else {
-      return Text(widget.result.device.remoteId.str);
-    }
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              "Device Name: ${getDeviceName(scanResult)}",
+              style: TextStyle(fontSize: 16),
+            ),
+            Text(
+              "BD Address: ${getBDAddress(scanResult)}",
+              style: TextStyle(fontSize: 12),
+            ),
+            SizedBox(height: 25),
+          ],
+        ),
+        buildConnectButton(context),
+      ],
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      title: _buildTitle(context),
+    return Column(
+      children: [
+        _buildTitle(context),
+      ],
     );
   }
 }
+
+// 
