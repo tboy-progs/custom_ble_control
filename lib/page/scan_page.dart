@@ -29,7 +29,7 @@ class _ScanPageState extends State<ScanPage> {
         }
       },
       onError: (e) {
-        print("scan error:${e} ");
+        print("scan error:$e ");
       },
     );
   }

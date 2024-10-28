@@ -21,7 +21,7 @@ class _ScanResultTileState extends State<ScanResultTile> {
     // TODO: implement initState
     super.initState();
 
-    this.scanResult = widget.scanResult;
+    scanResult = widget.scanResult;
   }
 
   String getDeviceName(ScanResult scanResult) {
@@ -37,7 +37,7 @@ class _ScanResultTileState extends State<ScanResultTile> {
   Widget buildConnectButton(BuildContext context) {
     return ElevatedButton(
       onPressed: () {},
-      child: Text("CONNECT"),
+      child: const Text("CONNECT"),
     );
   }
 
@@ -51,13 +51,13 @@ class _ScanResultTileState extends State<ScanResultTile> {
           children: <Widget>[
             Text(
               "Device Name: ${getDeviceName(scanResult)}",
-              style: TextStyle(fontSize: 16),
+              style: const TextStyle(fontSize: 16),
             ),
             Text(
               "BD Address: ${getBDAddress(scanResult)}",
-              style: TextStyle(fontSize: 12),
+              style: const TextStyle(fontSize: 12),
             ),
-            SizedBox(height: 25),
+            const SizedBox(height: 25),
           ],
         ),
         buildConnectButton(context),
