@@ -74,5 +74,3 @@ class _ScanResultTileState extends State<ScanResultTile> {
     );
   }
 }
-
-// 

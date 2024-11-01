@@ -69,15 +69,7 @@ class _ScanPageState extends State<ScanPage> {
       backgroundColor: Colors.grey[200],
       body: ListView(
         children: [
-          Container(
-            height: 150,
-            padding: const EdgeInsets.all(8),
-            child: ListView(
-              children: [
-                ..._buildScanResultTiles(context),
-              ],
-            ),
-          ),
+          ..._buildScanResultTiles(context),
         ],
       ),
       floatingActionButton: FloatingActionButton(
