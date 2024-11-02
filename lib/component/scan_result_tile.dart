@@ -35,9 +35,12 @@ class _ScanResultTileState extends State<ScanResultTile> {
   }
 
   Widget buildConnectButton(BuildContext context) {
-    return ElevatedButton(
+    return TextButton(
       onPressed: () {},
-      child: const Text("CONNECT"),
+      child: const Text(
+        "CONNECT",
+        style: TextStyle(fontSize: 12),
+      ),
     );
   }
 
@@ -50,12 +53,12 @@ class _ScanResultTileState extends State<ScanResultTile> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
-              "Device Name: ${getDeviceName(scanResult)}",
-              style: const TextStyle(fontSize: 16),
+              getDeviceName(scanResult),
+              style: const TextStyle(fontSize: 12),
             ),
             Text(
               "BD Address: ${getBDAddress(scanResult)}",
-              style: const TextStyle(fontSize: 12),
+              style: const TextStyle(fontSize: 8),
             ),
             const SizedBox(height: 25),
           ],
