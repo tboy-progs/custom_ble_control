@@ -24,14 +24,20 @@ class _ScanResultTileState extends State<ScanResultTile> {
     scanResult = widget.scanResult;
   }
 
-  String getDeviceName(ScanResult scanResult) {
-    return scanResult.advertisementData.advName.isEmpty
-        ? "No Name"
-        : scanResult.advertisementData.advName;
+  Text getDeviceName(ScanResult scanResult) {
+    return Text(
+      scanResult.advertisementData.advName.isEmpty
+          ? "No Name"
+          : scanResult.advertisementData.advName,
+      style: TextStyle(fontSize: 12),
+    );
   }
 
-  String getBDAddress(ScanResult scanResult) {
-    return scanResult.device.remoteId.toString();
+  Text getBDAddress(ScanResult scanResult) {
+    return Text(
+      scanResult.device.remoteId.toString(),
+      style: TextStyle(fontSize: 8),
+    );
   }
 
   Widget buildConnectButton(BuildContext context) {
@@ -45,25 +51,23 @@ class _ScanResultTileState extends State<ScanResultTile> {
   }
 
   Widget _buildTitle(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
+    return Column(
       children: [
-        Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              getDeviceName(scanResult),
-              style: const TextStyle(fontSize: 12),
+        const SizedBox(height: 25),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                getDeviceName(scanResult),
+                getBDAddress(scanResult),
+              ],
             ),
-            Text(
-              "BD Address: ${getBDAddress(scanResult)}",
-              style: const TextStyle(fontSize: 8),
-            ),
-            const SizedBox(height: 25),
+            buildConnectButton(context),
           ],
         ),
-        buildConnectButton(context),
       ],
     );
   }
