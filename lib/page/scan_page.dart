@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:custom_ble_control/component/scan_result_tile.dart';
 import 'package:flutter/material.dart';
@@ -63,10 +64,19 @@ class _ScanPageState extends State<ScanPage> {
         .toList();
   }
 
+  void onConnectPressed(BluetoothDevice device) {
+    try {
+      device.connect();
+      log('connect success.');
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Colors.grey[100],
       body: ListView(
         children: [
           ..._buildScanResultTiles(context),

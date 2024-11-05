@@ -5,9 +5,11 @@ class ScanResultTile extends StatefulWidget {
   const ScanResultTile({
     super.key,
     required this.scanResult,
+    this.onTap,
   });
 
   final ScanResult scanResult;
+  final VoidCallback? onTap;
 
   @override
   State<ScanResultTile> createState() => _ScanResultTileState();
@@ -29,7 +31,7 @@ class _ScanResultTileState extends State<ScanResultTile> {
       scanResult.advertisementData.advName.isEmpty
           ? "No Name"
           : scanResult.advertisementData.advName,
-      style: TextStyle(fontSize: 12),
+      style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
     );
   }
 
@@ -42,11 +44,13 @@ class _ScanResultTileState extends State<ScanResultTile> {
 
   Widget buildConnectButton(BuildContext context) {
     return TextButton(
-      onPressed: () {},
       child: const Text(
         "CONNECT",
         style: TextStyle(fontSize: 12),
       ),
+      onPressed: () {
+        (scanResult.advertisementData.connectable) ? widget.onTap : null;
+      },
     );
   }
 
