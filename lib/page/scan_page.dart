@@ -70,6 +70,9 @@ class _ScanPageState extends State<ScanPage> {
     try {
       device.connectAndUpdateStream().catchError((e) {
         log("connect failed...");
+        if (e is FlutterBluePlusException) {
+          log("${e.description}");
+        }
       });
       device.connect();
       log('connect success.');
