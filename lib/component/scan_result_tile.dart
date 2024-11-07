@@ -20,7 +20,6 @@ class _ScanResultTileState extends State<ScanResultTile> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     scanResult = widget.scanResult;
@@ -44,35 +43,32 @@ class _ScanResultTileState extends State<ScanResultTile> {
 
   Widget buildConnectButton(BuildContext context) {
     return TextButton(
+      onPressed:
+          (scanResult.advertisementData.connectable) ? widget.onTap : null,
       child: const Text(
         "CONNECT",
         style: TextStyle(fontSize: 12),
       ),
-      onPressed: () {
-        (scanResult.advertisementData.connectable) ? widget.onTap : null;
-      },
     );
   }
 
   Widget _buildTitle(BuildContext context) {
-    return Column(
-      children: [
-        const SizedBox(height: 25),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                getDeviceName(scanResult),
-                getBDAddress(scanResult),
-              ],
-            ),
-            buildConnectButton(context),
-          ],
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.all(12.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              getDeviceName(scanResult),
+              getBDAddress(scanResult),
+            ],
+          ),
+          buildConnectButton(context),
+        ],
+      ),
     );
   }
 

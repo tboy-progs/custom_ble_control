@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:custom_ble_control/component/scan_result_tile.dart';
+import 'package:custom_ble_control/utils/extra.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
@@ -30,7 +31,7 @@ class _ScanPageState extends State<ScanPage> {
         }
       },
       onError: (e) {
-        print("scan error:$e ");
+        log("scan error:$e ");
       },
     );
   }
@@ -41,15 +42,13 @@ class _ScanPageState extends State<ScanPage> {
     super.dispose();
   }
 
-  // onScanResultは以前の結果を再送信しない
   Future onScanPressed() async {
-    print("scan pressed.");
+    log("scan pressed.");
 
     try {
       await FlutterBluePlus.startScan(timeout: const Duration(seconds: 5));
     } catch (e) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text("Start scan error")));
+      log("start scan error.");
     }
     if (mounted) {
       setState(() {});
@@ -59,13 +58,19 @@ class _ScanPageState extends State<ScanPage> {
   List<Widget> _buildScanResultTiles(BuildContext context) {
     return _scanResults
         .map(
-          (r) => ScanResultTile(scanResult: r),
+          (r) => ScanResultTile(
+            scanResult: r,
+            onTap: () => onConnectPressed(r.device),
+          ),
         )
         .toList();
   }
 
   void onConnectPressed(BluetoothDevice device) {
     try {
+      device.connectAndUpdateStream().catchError((e) {
+        log("connect failed...");
+      });
       device.connect();
       log('connect success.');
     } catch (e) {
