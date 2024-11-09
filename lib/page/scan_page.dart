@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:custom_ble_control/component/scan_result_tile.dart';
+import 'package:custom_ble_control/page/device_page.dart';
 import 'package:custom_ble_control/utils/extra.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
@@ -67,18 +68,15 @@ class _ScanPageState extends State<ScanPage> {
   }
 
   void onConnectPressed(BluetoothDevice device) {
-    try {
-      device.connectAndUpdateStream().catchError((e) {
-        log("connect failed...");
-        if (e is FlutterBluePlusException) {
-          log("${e.description}");
-        }
-      });
-      device.connect();
-      log('connect success.');
-    } catch (e) {
-      log(e.toString());
-    }
+    device.connectAndUpdateStream().catchError((e) {
+      if (e is FlutterBluePlusException) log("e.description");
+    });
+
+    MaterialPageRoute route = MaterialPageRoute(
+      builder: (context) => DevicePage(device: device),
+      settings: const RouteSettings(name: '/DevicePage'),
+    );
+    Navigator.of(context).push(route);
   }
 
   @override

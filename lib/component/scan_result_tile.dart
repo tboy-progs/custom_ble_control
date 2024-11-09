@@ -30,14 +30,14 @@ class _ScanResultTileState extends State<ScanResultTile> {
       scanResult.advertisementData.advName.isEmpty
           ? "No Name"
           : scanResult.advertisementData.advName,
-      style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+      style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
     );
   }
 
   Text getBDAddress(ScanResult scanResult) {
     return Text(
       scanResult.device.remoteId.toString(),
-      style: TextStyle(fontSize: 8),
+      style: const TextStyle(fontSize: 8),
     );
   }
 
