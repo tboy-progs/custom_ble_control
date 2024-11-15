@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:custom_ble_control/component/service_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
@@ -23,6 +24,8 @@ class _DevicePageState extends State<DevicePage> {
   late StreamSubscription<BluetoothConnectionState>
       _connectionStateSubscription;
 
+  List<BluetoothService> _services = [];
+
   @override
   void initState() {
     super.initState();
@@ -32,6 +35,10 @@ class _DevicePageState extends State<DevicePage> {
     _connectionStateSubscription = device.connectionState.listen((state) async {
       _connectionState = state;
 
+      if (state == BluetoothConnectionState.connected) {}
+
+      if (state == BluetoothConnectionState.disconnected) {}
+
       if (mounted) {
         setState(() {});
       }
@@ -40,7 +47,12 @@ class _DevicePageState extends State<DevicePage> {
 
   @override
   void dispose() {
+    _connectionStateSubscription.cancel();
     super.dispose();
+  }
+
+  bool get isConnected {
+    return _connectionState == BluetoothConnectionState.connected;
   }
 
   Widget buildRemoteId() {
@@ -62,6 +74,18 @@ class _DevicePageState extends State<DevicePage> {
     );
   }
 
+  Future _buildServiceTiles() async {
+    try {
+      _services = await device.discoverServices();
+    } catch (e) {
+      print(e);
+    }
+
+    for (var element in _services) {
+      print(element.serviceUuid);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,10 +99,21 @@ class _DevicePageState extends State<DevicePage> {
           icon: const Icon(Icons.arrow_back),
         ),
         title: Text(device.platformName),
+        actions: [
+          TextButton(
+              onPressed: () {},
+              child: Text(isConnected ? 'DISCONNECT' : 'CONNECT')),
+        ],
       ),
       body: Column(
         children: [
           buildRemoteId(),
+          OutlinedButton(
+            onPressed: () {
+              _buildServiceTiles();
+            },
+            child: Text("get services"),
+          ),
         ],
       ),
     );

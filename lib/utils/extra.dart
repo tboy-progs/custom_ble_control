@@ -36,7 +36,6 @@ extension Extra on BluetoothDevice {
     _cstream.add(true);
     try {
       await connect(mtu: null);
-      log("connected.");
     } finally {
       _cstream.add(false);
     }
